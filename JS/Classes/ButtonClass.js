@@ -3,6 +3,5 @@ class ButtonClass {
     constructor(buttonId, buttonText, buttonColor) {
         this.buttonId = buttonId;
         this.buttonText = buttonText
-        this.buttonColor = buttonColor;
     }
 }

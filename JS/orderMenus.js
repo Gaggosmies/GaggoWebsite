@@ -1,11 +1,14 @@
 var originalDiv = document.getElementById("mainDiv");
+var commissionOrder = new CommissionOrder();
 
 function DrawMainMenu () {
+    ClearChildren();
+
     var Buttons = [
         new ButtonClass("OrderBtn", "Order Here", "btn-primary"),
     ];
 
-    DrawButtons(Buttons, originalDiv, DrawOrderMenu1);
+    DrawButtons(Buttons, originalDiv, DrawOrderMenu1, DrawMainMenu);
 }
 
 DrawMainMenu();
@@ -14,43 +17,43 @@ function DrawOrderMenu1 () {
     ClearChildren();
 
     var Buttons = [
-        new ButtonClass("ShadedBtn",        "Flat",                     "btn-primary"),
-        new ButtonClass("ShadedBtn",        "Shaded",                   "btn-primary"),
-        new ButtonClass("HighlightedBtn",   "Shaded + Highlighted",     "btn-primary"),
+        new ButtonClass("ShadedBtn",        "Flat"),
+        new ButtonClass("ShadedBtn",        "Shaded"),
+        new ButtonClass("HighlightedBtn",   "Shaded + Highlighted"),
     ];
 
-    DrawButtons(Buttons, originalDiv, DrawOrderMenu2);
+    DrawButtons(Buttons, originalDiv, DrawOrderMenu2, DrawMainMenu);
 }
 
 function DrawOrderMenu2 () {
     ClearChildren();
 
     var Buttons = [
-        new ButtonClass("OneBtn",       "One",      "btn-primary"),
-        new ButtonClass("TwoBtn",       "Two",      "btn-primary"),
-        new ButtonClass("ThreeBtn",     "Three",    "btn-primary"),
-        new ButtonClass("FourBtn",      "Four",     "btn-primary"),
+        new ButtonClass("OneBtn",       "One"),
+        new ButtonClass("TwoBtn",       "Two"),
+        new ButtonClass("ThreeBtn",     "Three"),
+        new ButtonClass("FourBtn",      "Four"),
     ];
 
-    DrawButtons(Buttons, originalDiv, DrawOrderMenu3);
+    DrawButtons(Buttons, originalDiv, DrawOrderMenu3, DrawOrderMenu1);
 }
 
 function DrawOrderMenu3 () {
     ClearChildren();
 
     var Buttons = [
-        new ButtonClass("NoBGBtn",          "None",     "btn-primary"),
-        new ButtonClass("EasyBgBtn",        "Easy",     "btn-primary"),
-        new ButtonClass("ComplexBgBtn",     "Complex",  "btn-primary"),
+        new ButtonClass("NoBGBtn",          "None"),
+        new ButtonClass("EasyBgBtn",        "Easy"),
+        new ButtonClass("ComplexBgBtn",     "Complex"),
     ];
 
-    DrawButtons(Buttons, originalDiv, DrawOrderMenu4);
+    DrawButtons(Buttons, originalDiv, DrawOrderMenu4, DrawOrderMenu2);
 }
 
 function DrawOrderMenu4 () {
     ClearChildren();
 
-    var p = document.createElement("P");
+    var p = document.createElement("p");
     p.textContent = "Success";
     originalDiv.append(p);
 }
