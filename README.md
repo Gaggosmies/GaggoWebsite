@@ -8,6 +8,8 @@ to install all the node modules into your local computer.
 ---
 
 Todo: 
+- [ ] Fix main menu buttons
+
 - [ ] Add description for the commissioner (in database)
 - [ ] Add note for internal notes (in database)
 - [ ] Fix API calls

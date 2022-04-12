@@ -118,10 +118,23 @@ function SummaryForCommission() {
 
     FinishedCommissionOrder.Quality = QualityButtons[QualitySelected.selectedItem].buttonText;
     FinishedCommissionOrder.Quantity = QuantityButtons[QuantitySelected.selectedItem].buttonText;
-    FinishedCommissionOrder.Background = BackgroundButtons[BackgroundSelected.selectedItem].buttonText;
     FinishedCommissionOrder.Date = dateNow;
-    FinishedCommissionOrder.Price = (QualitySelected.price * QuantitySelected.price) + BackgroundSelected.price;
-    console.log(FinishedCommissionOrder.Price);
+    FinishedCommissionOrder.Price = (QualitySelected.price * QuantitySelected.price)
+
+    // If emoji commissions not selected
+    if (QualitySelected.selectedItem != 0) {
+        FinishedCommissionOrder.Background = BackgroundButtons[BackgroundSelected.selectedItem].buttonText;
+        FinishedCommissionOrder.Price += BackgroundSelected.price;
+    }
+    // If emoji commissions selected
+    else {
+        FinishedCommissionOrder.Background = "Emoji";
+        // Fifth emoji is free
+        if(QuantitySelected.selectedItem === 4)
+        {
+            FinishedCommissionOrder.Price -= 5;
+        }
+    }
 
     if (DiscountPercentage != 0) {
         FinishedCommissionOrder.Price = FinishedCommissionOrder.Price * ((100 - DiscountPercentage) / 100);
