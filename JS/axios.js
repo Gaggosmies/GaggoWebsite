@@ -14,20 +14,23 @@ function GetFinishedCommissions() {
         });
 }
 
-function PostFinishedOrder() {
+function PostFinishedOrder(Order) {
     const date = new Date();
     var dateNow = date.getFullYear().toString() + "/" + ('0' + (date.getMonth() + 1)).slice(-2).toString() + "/" + ('0' + date.getDate()).slice(-2).toString() + "-" + ('0' + date.getHours()).slice(-2).toString() + ':' + ('0' + date.getMinutes()).slice(-2).toString();
     
     axios.post(APIurl, {
         "data": {
-            "ID": 1,
-            "Username": "Gaggotest",
-            "Quality": "Shaded",
-            "Character Quantity": "Bad",
-            "Background": "Lfol",
-            "Price": 0,
+            // was there some API call for count?
+            "id": 1,
+            "Username": Order.Username,
+            "Quality": Order.Quality,
+            "CharacterQuantity": Order.Quantity,
+            "Background": Order.Background,
+            "Price": Order.Price,
             "Date": dateNow,
-            "Status": "Done"
+            "Status": "Pending",
+            "Description": Order.Description,
+            "Note": ""
         }
     }).then(response => {
         console.log(response.data);
