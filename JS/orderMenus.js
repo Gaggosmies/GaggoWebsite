@@ -1,59 +1,50 @@
 var originalDiv = document.getElementById("mainDiv");
 var commissionOrder = new CommissionOrder();
 
-function DrawMainMenu () {
+function DrawMainMenu() {
     ClearChildren();
 
-    var Buttons = [
-        new ButtonClass("OrderBtn", "Order Here", "btn-primary"),
+    var MainMenuButtons = [
+        new MainMenuButtonClass("Order Here", DrawQualityMenu, "btn-outline-primary"),
     ];
 
-    DrawButtons(Buttons, originalDiv, DrawOrderMenu1, DrawMainMenu);
+    DrawMainMenuButtons(MainMenuButtons, DrawQualityMenu);
+    DrawNextButton(DrawQualityMenu);
 }
 
 DrawMainMenu();
 
-function DrawOrderMenu1 () {
+function DrawQualityMenu() {
     ClearChildren();
-
-    var Buttons = [
-        new ButtonClass("ShadedBtn",        "Flat"),
-        new ButtonClass("ShadedBtn",        "Shaded"),
-        new ButtonClass("HighlightedBtn",   "Shaded + Highlighted"),
-    ];
-
-    DrawButtons(Buttons, originalDiv, DrawOrderMenu2, DrawMainMenu);
+    DrawButtons(QualityButtons, QualitySelected, DrawQuantityMenu, DrawMainMenu);
 }
 
-function DrawOrderMenu2 () {
+function DrawQuantityMenu() {
     ClearChildren();
-
-    var Buttons = [
-        new ButtonClass("OneBtn",       "One"),
-        new ButtonClass("TwoBtn",       "Two"),
-        new ButtonClass("ThreeBtn",     "Three"),
-        new ButtonClass("FourBtn",      "Four"),
-    ];
-
-    DrawButtons(Buttons, originalDiv, DrawOrderMenu3, DrawOrderMenu1);
+    DrawButtons(QuantityButtons, QuantitySelected, DrawBackgroundMenu, DrawQualityMenu);
 }
 
-function DrawOrderMenu3 () {
+function DrawBackgroundMenu() {
     ClearChildren();
-
-    var Buttons = [
-        new ButtonClass("NoBGBtn",          "None"),
-        new ButtonClass("EasyBgBtn",        "Easy"),
-        new ButtonClass("ComplexBgBtn",     "Complex"),
-    ];
-
-    DrawButtons(Buttons, originalDiv, DrawOrderMenu4, DrawOrderMenu2);
+    DrawButtons(BackgroundButtons, BackgroundSelected, DrawSummaryMenu, DrawQuantityMenu);
 }
 
-function DrawOrderMenu4 () {
+function DrawSummaryMenu() {
     ClearChildren();
+
+    SummaryForCommission();
 
     var p = document.createElement("p");
-    p.textContent = "Success";
+    p.textContent = "Quality: " + QualityButtons[QualitySelected.selectedItem].buttonText + ", price: " + QualitySelected.price + " $\n";
+    p.textContent += "Quantity: " + QuantityButtons[QuantitySelected.selectedItem].buttonText + ", price: " + QuantitySelected.price + " x\n";
+    p.textContent += "Background: " + BackgroundButtons[BackgroundSelected.selectedItem].buttonText + ", price: " + BackgroundSelected.price + " $\n";
+
+    if (DiscountPercentage != 0) {
+        p.textContent += "Discount: " + DiscountPercentage + "%, Discounted: " + ((FinishedCommissionOrder.Price / ((100 - DiscountPercentage) / 100) * (DiscountPercentage / 100)) + " $\n");
+    }
+    console.log(FinishedCommissionOrder.Price);
+    p.textContent += "Total: " + FinishedCommissionOrder.Price + " $\n";
+
     originalDiv.append(p);
+    DrawBackButton(DrawBackgroundMenu);
 }

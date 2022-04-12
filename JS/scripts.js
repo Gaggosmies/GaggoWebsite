@@ -1,5 +1,5 @@
 // Functions used in drawing menus
-function ClearChildren () {
+function ClearChildren() {
     var child = originalDiv.lastElementChild;
     while (child) {
         originalDiv.removeChild(child);
@@ -7,61 +7,123 @@ function ClearChildren () {
     }
 }
 
-// Give the array of buttons, element where to append to, and the next- and old function
-function DrawButtons (Buttons, AppendElement, NextFunction, OldFunction)
-{
+// todo: fix
+// Give the array of main menu elements
+function DrawMainMenuButtons(Buttons) {
     // Make new container for buttons
     var buttonContainer = document.createElement("div");
-    AppendElement
+    originalDiv
         .appendChild(buttonContainer);
 
-    Buttons.forEach(function (ButtonClass, buttonIndex, buttonArray) {
+    Buttons.forEach(function (MainMenuButtonClass, buttonIndex, buttonArray) {
         // add button details
         var button = document.createElement("button");
 
-        button.className = "btn-outline-primary";
-        button.id = buttonArray[buttonIndex].buttonId;
+        button.className = buttonArray[buttonIndex].buttonColor;
+        button.id = buttonArray[buttonIndex].buttonText + "Btn";
         button.textContent = buttonArray[buttonIndex].buttonText;
 
         button.addEventListener(
             'click',
-            function() {
-                NextFunction();
+            function () {
+                buttonArray[buttonIndex].NextFunction();
             }
         );
 
         // Append buttons
         buttonContainer.append(button);
     });
+}
 
-    // Make new container for back and next buttons
-    var menuContainer = document.createElement("div");
-    AppendElement
-        .appendChild(menuContainer);
+// Give the array of buttons, SelectClass, and the next function
+function DrawButtons(Buttons, Selection, NextFunction, OldFunction) {
+    // Make new container for buttons
+    var buttonContainer = document.createElement("div");
+    originalDiv
+        .appendChild(buttonContainer);
 
-    // Print Back button
-    var backButton = document.createElement("button");
-    backButton.textContent = "Back";
-    backButton.className = "btn-primary";
-    backButton.addEventListener(
-        'click',
-        function() {
-            OldFunction();
+    Buttons.forEach(function (ButtonClass, buttonIndex, buttonArray) {
+        // add button details
+        var button = document.createElement("button");
+
+        // Selected buttons will be highlighted
+        if (Selection.selectedItem === buttonIndex) {
+            button.className = "btn-primary";
         }
-    );
+        else {
+            button.className = "btn-outline-primary";
+        }
 
-    menuContainer.append(backButton);
+        button.id = buttonArray[buttonIndex].buttonText + "Btn";
+        button.textContent = buttonArray[buttonIndex].buttonText;
 
+        button.addEventListener(
+            'click',
+            function () {
+                Selection.selectedItem = buttonIndex;
+                Selection.price = buttonArray[buttonIndex].price;
+                NextFunction();
+            }
+        );
+
+        // Append buttons
+        buttonContainer.append(button);
+
+        // Draw back button only once
+        if (buttonIndex === 0) {
+            DrawBackButton(OldFunction);
+        }
+
+        // Draw next button if item has been selected
+        if (Selection.selectedItem === buttonArray[buttonIndex]) {
+            DrawNextButton(NextFunction);
+        }
+    });
+}
+
+function DrawNextButton(NextFunction) {
     // Print Next button
     var nextButton = document.createElement("button");
     nextButton.textContent = "Next";
     nextButton.className = "btn-primary";
     nextButton.addEventListener(
         'click',
-        function() {
+        function () {
             NextFunction();
         }
     );
 
-    menuContainer.append(nextButton);
+    originalDiv.append(nextButton);
+}
+
+function DrawBackButton(OldFunction) {
+    // Print Back button
+    var backButton = document.createElement("button");
+    backButton.textContent = "Back";
+    backButton.className = "btn-primary";
+    backButton.addEventListener(
+        'click',
+        function () {
+            OldFunction();
+        }
+    );
+
+    originalDiv.append(backButton);
+}
+
+function SummaryForCommission() {
+    const date = new Date();
+    var dateNow = date.getFullYear().toString() + "/" + ('0' + (date.getMonth() + 1)).slice(-2).toString() + "/" + ('0' + date.getDate()).slice(-2).toString() + "-" + ('0' + date.getHours()).slice(-2).toString() + ':' + ('0' + date.getMinutes()).slice(-2).toString();
+
+
+    FinishedCommissionOrder.Quality = QualityButtons[QualitySelected.selectedItem].buttonText;
+    FinishedCommissionOrder.Quantity = QuantityButtons[QuantitySelected.selectedItem].buttonText;
+    FinishedCommissionOrder.Background = BackgroundButtons[BackgroundSelected.selectedItem].buttonText;
+    FinishedCommissionOrder.Date = dateNow;
+    FinishedCommissionOrder.Price = (QualitySelected.price * QuantitySelected.price) + BackgroundSelected.price;
+    console.log(FinishedCommissionOrder.Price);
+
+    if (DiscountPercentage != 0) {
+        FinishedCommissionOrder.Price = FinishedCommissionOrder.Price * ((100 - DiscountPercentage) / 100);
+    }
 }
