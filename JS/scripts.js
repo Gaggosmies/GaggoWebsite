@@ -132,7 +132,7 @@ function SummaryForCommission() {
         // Fifth emoji is free
         if(QuantitySelected.selectedItem === 4)
         {
-            FinishedCommissionOrder.Price -= 5;
+            FinishedCommissionOrder.Price -= QualitySelected.price;
         }
     }
 
