@@ -115,6 +115,10 @@ function SummaryForCommission() {
     const date = new Date();
     var dateNow = date.getFullYear().toString() + "/" + ('0' + (date.getMonth() + 1)).slice(-2).toString() + "/" + ('0' + date.getDate()).slice(-2).toString() + "-" + ('0' + date.getHours()).slice(-2).toString() + ':' + ('0' + date.getMinutes()).slice(-2).toString();
 
+    // sets out the id of the commission, not the best place for it but it should have enough time to register if it's here. 
+    // If there are two of the same ids, it's because two users made their commissions at the same time and this one couldn't update on time.
+    // It should be very unlikely though in real life.
+    GetCommissionCount();
 
     FinishedCommissionOrder.Quality = QualityButtons[QualitySelected.selectedItem].buttonText;
     FinishedCommissionOrder.Quantity = QuantityButtons[QuantitySelected.selectedItem].buttonText;

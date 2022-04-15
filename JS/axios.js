@@ -14,6 +14,16 @@ function GetFinishedCommissions() {
         });
 }
 
+const GetCommissionCount = async() => {
+    try {
+        const resp = await axios.get(APIurl + "/count");
+        FinishedCommissionOrder.id = resp.data.rows + 1;
+        console.log(FinishedCommissionOrder.id);
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 function PostFinishedOrder(Order) {
     const date = new Date();
     var dateNow = date.getFullYear().toString() + "/" + ('0' + (date.getMonth() + 1)).slice(-2).toString() + "/" + ('0' + date.getDate()).slice(-2).toString() + "-" + ('0' + date.getHours()).slice(-2).toString() + ':' + ('0' + date.getMinutes()).slice(-2).toString();
@@ -21,7 +31,7 @@ function PostFinishedOrder(Order) {
     axios.post(APIurl, {
         "data": {
             // was there some API call for count?
-            "id": 1,
+            "id": Order.id,
             "Username": Order.Username,
             "Quality": Order.Quality,
             "CharacterQuantity": Order.Quantity,

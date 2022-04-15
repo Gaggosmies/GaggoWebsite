@@ -11,7 +11,6 @@ Todo:
 - [ ] Fix main menu buttons
 
 - [ ] Fix API calls
-- [ ] Add auto incrementation of ID 
 
 - [ ] Make array for orders (multiple orders at the same time)
 - [ ] Make view for order summary
@@ -26,8 +25,6 @@ Todo:
 
 - [ ] ToS on mainmenu
 
-
-
 - [ ] Add listview of accepted commissions (queue)
 - [ ] Add listview of pending commissions (accept or decline)
 - [ ] Add listview of accepted commissions
@@ -41,3 +38,4 @@ Done:
 - [x] Add description for the commissioner (in database)
 - [x] Add note for internal notes (in database)
 - [x] Set note if discount given
+- [x] Add auto incrementation of ID 
