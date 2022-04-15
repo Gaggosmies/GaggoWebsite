@@ -138,5 +138,6 @@ function SummaryForCommission() {
 
     if (DiscountPercentage != 0) {
         FinishedCommissionOrder.Price = FinishedCommissionOrder.Price * ((100 - DiscountPercentage) / 100);
+        FinishedCommissionOrder.Note = "Discount: " + DiscountPercentage + "%";
     }
 }

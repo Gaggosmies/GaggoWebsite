@@ -30,7 +30,7 @@ function PostFinishedOrder(Order) {
             "Date": dateNow,
             "Status": "Pending",
             "Description": Order.Description,
-            "Note": ""
+            "Note": Order.Note
         }
     }).then(response => {
         console.log(response.data);

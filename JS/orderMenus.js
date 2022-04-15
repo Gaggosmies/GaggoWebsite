@@ -135,8 +135,7 @@ function DrawFinishOrder() {
     );
 
     originalDiv.append(orderButton);
-
-    console.log(FinishedCommissionOrder.Username);
+    
     // If there are no given username
     if (FinishedCommissionOrder.Username == null) {
         alert("Please give a proper username");

@@ -2,8 +2,8 @@ const DiscountPercentage = 0;
 
 var QualityButtons = [
     new ButtonClass("Emoji", 5),
-    new ButtonClass("Flat", 15),
-    new ButtonClass("Shaded", 25),
+    new ButtonClass("Flat", 13),
+    new ButtonClass("Shaded", 20),
     new ButtonClass("Shaded + Highlighted", 25),
 ];
 
