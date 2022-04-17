@@ -8,19 +8,16 @@ to install all the node modules into your local computer.
 ---
 
 Todo: 
-- [ ] Fix main menu buttons
-
 - [ ] Fix API calls
 
 - [ ] Make array for orders (multiple orders at the same time)
 
-- [ ] Add "I've read ToS" before Ordering can commence
+- [ ] Add background
 
 - [ ] Username red unless name given? 
 - [ ] Checkbox for setting username anonymous?
 
-- [ ] ToS on mainmenu
-
+- [ ] Draw ToS
 - [ ] Add listview of accepted commissions (queue)
 - [ ] Add listview of pending commissions (accept or decline)
 - [ ] Add listview of accepted commissions
@@ -39,3 +36,7 @@ Done:
 - [x] 2 Divs, mainDiv and secondaryDiv?
 - [x] Make view for order summary
 - [x] "?" Logo shows which user data will be collected and shown (username and order)
+- [x] Fix main menu buttons
+- [x] Add "I've read ToS" before Ordering can commence
+- [x] ToS on mainmenu
+- [x] Hover shows price

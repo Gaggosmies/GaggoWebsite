@@ -1,17 +1,29 @@
 // Functions used in drawing menus
 function ClearChildren() {
+    ClearMainChildern();
+    ClearSecondChildern();
+    ClearButtonChildern();
+}
+
+function ClearMainChildern() {
     var child = mainDiv.lastElementChild;
     while (child) {
         mainDiv.removeChild(child);
         child = mainDiv.lastElementChild;
     }
+}
 
+function ClearSecondChildern() {
+    var child = mainDiv.lastElementChild;
     child = secondDiv.lastElementChild;
     while (child) {
         secondDiv.removeChild(child);
         child = secondDiv.lastElementChild;
     }
+}
 
+function ClearButtonChildern() {
+    var child = mainDiv.lastElementChild;
     child = buttonDiv.lastElementChild;
     while (child) {
         buttonDiv.removeChild(child);
@@ -19,32 +31,28 @@ function ClearChildren() {
     }
 }
 
-// todo: fix
 // Give the array of main menu elements
-function DrawMainMenuButtons(Buttons) {
-    // Make new container for buttons
-    var buttonContainer = document.createElement("div");
-    mainDiv
-        .appendChild(buttonContainer);
+function DrawMainMenuButtons(text, color, NextFunction) {
+    var container = document.createElement("div");
+    container.className = "grid-item";
+    mainDiv.append(container);
 
-    Buttons.forEach(function (MainMenuButtonClass, buttonIndex, buttonArray) {
-        // add button details
-        var button = document.createElement("button");
+    // add button details
+    var button = document.createElement("button");
 
-        button.className = buttonArray[buttonIndex].buttonColor;
-        button.id = buttonArray[buttonIndex].buttonText + "Btn";
-        button.textContent = buttonArray[buttonIndex].buttonText;
+    button.className = color;
+    button.id = text + "Btn";
+    button.textContent = text;
 
-        button.addEventListener(
-            'click',
-            function () {
-                buttonArray[buttonIndex].NextFunction();
-            }
-        );
+    button.addEventListener(
+        'click',
+        function () {
+            NextFunction();
+        }
+    );
 
-        // Append buttons
-        buttonContainer.append(button);
-    });
+    // Append buttons
+    container.append(button);
 }
 
 // Give the array of buttons, SelectClass, and the next function
@@ -76,6 +84,27 @@ function DrawButtons(Buttons, Selection, NextFunction, OldFunction) {
                 NextFunction();
             }
         );
+
+        if (OldFunction === DrawQualityMenu){
+            button.addEventListener(
+                'mouseenter',
+                function () {
+                    ClearSecondChildern();
+                    DrawNoteForPriceMultiply(buttonArray[buttonIndex].buttonText, buttonArray[buttonIndex].price);
+                }
+            );
+        }
+        else{
+            button.addEventListener(
+                'mouseenter',
+                function () {
+                    ClearSecondChildern();
+                    DrawNoteForPrice(buttonArray[buttonIndex].buttonText, buttonArray[buttonIndex].price);
+                }
+            );
+        }
+
+        
 
         // Append buttons
         container.append(button);
@@ -256,6 +285,8 @@ function DrawFinalDetails() {
 }
 
 function DrawFinish() {
+    DrawTotalLine();
+
     var orderButton = document.createElement("button");
     orderButton.textContent = "Make Order";
     orderButton.className = "btn-danger";
@@ -275,9 +306,35 @@ function DrawFinish() {
     mainDiv.append(orderButton);
 }
 
-function DrawNoteForUserData() {
+function DrawNoteForUser(text) {
     var p = document.createElement("p");
     p.style.color = "red";
-    p.textContent += "Note: Username and picture details will be public in queue.";
+    p.textContent += text;
     secondDiv.append(p);
+}
+
+function DrawNoteForPrice(text, price) {
+    var p = document.createElement("p");
+    p.textContent += text + ": "+ price;
+    p.textContent += "$";
+    secondDiv.append(p);
+}
+
+function DrawNoteForPriceMultiply(text, price) {
+    var p = document.createElement("p");
+    p.textContent += text + ": "+ price;
+    p.textContent += "x";
+    secondDiv.append(p);
+}
+
+function DrawToSScreen() {
+    var p = document.createElement("p");
+    p.textContent += "ToS Stuff goes here";
+    mainDiv.append(p);
+}
+
+function DrawQueueScreen() {
+    var p = document.createElement("p");
+    p.textContent += "Queue Stuff goes here";
+    mainDiv.append(p);
 }

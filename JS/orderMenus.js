@@ -6,15 +6,22 @@ var commissionOrder = new CommissionOrder();
 function DrawMainMenu() {
     ClearChildren();
 
-    var MainMenuButtons = [
-        new MainMenuButtonClass("Order Here", DrawQualityMenu, "btn-outline-primary"),
-    ];
-
-    DrawMainMenuButtons(MainMenuButtons, DrawQualityMenu);
-    DrawNextButton(DrawQualityMenu);
+    DrawMainMenuButtons("Order Here", "btn-primary", DrawReadToS);
+    DrawMainMenuButtons("Queue", "btn-secondary", DrawQueue);
+    DrawMainMenuButtons("ToS", "btn-danger", DrawToS);
 }
 
 DrawMainMenu();
+
+function DrawReadToS() {
+    ClearChildren();
+    DrawMainMenuButtons("I've read the ToS and I agree", "btn-primary", DrawQualityMenu);
+    DrawMainMenuButtons("ToS", "btn-danger", DrawToS);
+
+    DrawNoteForUser("Note: Read and Agree to Terms of Service before continuing");
+
+    DrawBackButton(DrawMainMenu);
+}
 
 function DrawQualityMenu() {
     ClearChildren();
@@ -60,12 +67,28 @@ function DrawFinishOrder() {
     ClearChildren();
 
     DrawFinish();
-    DrawNoteForUserData();
+    DrawNoteForUser("Note: Username and picture details will be public in queue.");
     DrawBackButton(DrawAskFinalDetails);
-    
+
     // If there are no given username
     if (FinishedCommissionOrder.Username == null || FinishedCommissionOrder.Username == "") {
         alert("Please give a proper username");
         DrawAskFinalDetails();
     }
+}
+
+function DrawToS() {
+    ClearChildren();
+
+    DrawToSScreen();
+
+    DrawBackButton(DrawMainMenu);
+}
+
+function DrawQueue() {
+    ClearChildren();
+
+    DrawQueueScreen();
+
+    DrawBackButton(DrawMainMenu);
 }

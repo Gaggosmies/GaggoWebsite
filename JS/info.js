@@ -1,4 +1,4 @@
-const DiscountPercentage = 30;
+const DiscountPercentage = 0;
 
 var QualityButtons = [
     new ButtonClass("Emoji", 5),
