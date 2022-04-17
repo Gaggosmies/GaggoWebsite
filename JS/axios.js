@@ -47,6 +47,20 @@ function PostFinishedOrder(Order) {
     });
 }
 
+function PostFeedback (feedback) {
+    const date = new Date();
+    var dateNow = date.getFullYear().toString() + "/" + ('0' + (date.getMonth() + 1)).slice(-2).toString() + "/" + ('0' + date.getDate()).slice(-2).toString() + "-" + ('0' + date.getHours()).slice(-2).toString() + ':' + ('0' + date.getMinutes()).slice(-2).toString();
+
+    axios.post(APIurl + "?sheet=Feedback", {
+        "data": {
+            "Date": dateNow,
+            "Feedback": feedback
+        }
+    }).then(response => {
+        console.log(response.data);
+    });
+}
+
 function PatchToComplete() {
     axios.patch(APIurl + '/ID/1', {
         "data": {

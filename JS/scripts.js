@@ -341,18 +341,11 @@ function DrawQueueScreen() {
 
 function DrawFeedbackScreen() {
     var p = document.createElement("p");
-    p.textContent += "Give feedback for the website (not working yet)";
+    p.textContent += "Give feedback for the website";
     secondDiv.append(p);
 
     var feedbackInput = document.createElement("textarea");
     feedbackInput.placeholder = "Feedback";
-
-    feedbackInput.addEventListener(
-        'change',
-        function () {
-            FinishedCommissionOrder.Username = feedbackInput.value;
-        }
-    );
 
     mainDiv.append(feedbackInput);
 
@@ -363,16 +356,10 @@ function DrawFeedbackScreen() {
         'click',
         function () {
             PostFeedback(feedbackInput.value)
-            // alert("Feedback Sent!");
-            alert("Feedback not set yet!");
+            alert("Feedback Sent!");
             DrawMainMenu();
         }
     );
 
     buttonDiv.append(feedbackButton);
-}
-
-function PostFeedback (feedback) {
-    // send to database but different tab?
-    console.log(feedback);
 }
