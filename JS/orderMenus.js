@@ -8,7 +8,7 @@ function DrawMainMenu() {
 
     DrawMainMenuButtons("Order Here", "btn-primary", DrawReadToS);
     DrawMainMenuButtons("Queue", "btn-secondary", DrawQueue);
-    DrawMainMenuButtons("ToS", "btn-danger", OpenToS);
+    DrawMainMenuButtons("Terms of Service", "btn-danger", OpenToS);
 
     DrawMainMenuButtons("Feedback", "btn-warning", DrawFeedback);
 }
@@ -18,7 +18,7 @@ DrawMainMenu();
 function DrawReadToS() {
     ClearChildren();
     DrawMainMenuButtons("I've read the ToS and I agree", "btn-primary", DrawQualityMenu);
-    DrawMainMenuButtons("ToS", "btn-danger", OpenToS);
+    DrawMainMenuButtons("Terms of Service", "btn-danger", OpenToS);
 
     DrawNoteForUser("Note: Read and Agree to Terms of Service before continuing");
 

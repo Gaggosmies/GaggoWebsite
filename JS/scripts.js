@@ -356,12 +356,13 @@ function DrawQueueLines(queueObjects) {
     // Draw gotten queue elements
     queueObjects.forEach(function (CommissionOrder, CommissionIndex, CommissionArray) {
         var p = document.createElement("p");
+        p.className = "grid-queue-p";
         p.textContent += CommissionArray[CommissionIndex].Username;
         p.textContent += ": "
         p.textContent += CommissionArray[CommissionIndex].Quality;
         p.textContent += " ";
         p.textContent += CommissionArray[CommissionIndex].CharacterQuantity;
-        p.textContent += " character pic";
+        p.textContent += " character(s)";
 
         if (CommissionArray[CommissionIndex].Status === "Pending"){
             queuePending.append(p);
