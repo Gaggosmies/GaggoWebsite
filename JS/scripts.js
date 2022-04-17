@@ -31,7 +31,6 @@ function ClearButtonChildern() {
     }
 }
 
-// Give the array of main menu elements
 function DrawMainMenuButtons(text, color, NextFunction) {
     var container = document.createElement("div");
     container.className = "grid-item";
@@ -51,11 +50,11 @@ function DrawMainMenuButtons(text, color, NextFunction) {
         }
     );
 
-    // Append buttons
+    // Append button
     container.append(button);
 }
 
-// Give the array of buttons, SelectClass, and the next function
+// Give the array of buttons, SelectClass, and the next and old function
 function DrawButtons(Buttons, Selection, NextFunction, OldFunction) {
 
     Buttons.forEach(function (ButtonClass, buttonIndex, buttonArray) {
@@ -85,6 +84,7 @@ function DrawButtons(Buttons, Selection, NextFunction, OldFunction) {
             }
         );
 
+        // Show the added price in second div
         if (OldFunction === DrawQualityMenu) {
             button.addEventListener(
                 'mouseenter',
@@ -104,9 +104,7 @@ function DrawButtons(Buttons, Selection, NextFunction, OldFunction) {
             );
         }
 
-
-
-        // Append buttons
+        // Append button
         container.append(button);
 
         // Draw back button only once
@@ -332,6 +330,7 @@ function DrawQueueScreen() {
 }
 
 function DrawQueueLines(queueObjects) {
+    // Draw containers for queues
     var queueContainer = document.createElement("div");
     mainDiv.append(queueContainer);
 
@@ -351,6 +350,7 @@ function DrawQueueLines(queueObjects) {
     queuePending.className = "grid-queue-item grid-queue-2";
     queueContainer.append(queuePending);
 
+    // Draw gotten queue elements
     queueObjects.forEach(function (CommissionOrder, CommissionIndex, CommissionArray) {
         var p = document.createElement("p");
         p.textContent += CommissionArray[CommissionIndex].Username;
