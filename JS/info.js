@@ -1,4 +1,4 @@
-const DiscountPercentage = 0;
+const DiscountPercentage = 30;
 
 var QualityButtons = [
     new ButtonClass("Emoji", 5),
@@ -23,7 +23,7 @@ QuantitySelected.choicesCount = QuantityButtons.length;
 
 var BackgroundButtons = [
     new ButtonClass("None", 0),
-    new ButtonClass("Easy", 10),
+    new ButtonClass("Simple", 10),
     new ButtonClass("Complex", 20),
 ];
 

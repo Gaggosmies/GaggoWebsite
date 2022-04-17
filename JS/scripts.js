@@ -1,9 +1,21 @@
 // Functions used in drawing menus
 function ClearChildren() {
-    var child = originalDiv.lastElementChild;
+    var child = mainDiv.lastElementChild;
     while (child) {
-        originalDiv.removeChild(child);
-        child = originalDiv.lastElementChild;
+        mainDiv.removeChild(child);
+        child = mainDiv.lastElementChild;
+    }
+
+    child = secondDiv.lastElementChild;
+    while (child) {
+        secondDiv.removeChild(child);
+        child = secondDiv.lastElementChild;
+    }
+
+    child = buttonDiv.lastElementChild;
+    while (child) {
+        buttonDiv.removeChild(child);
+        child = buttonDiv.lastElementChild;
     }
 }
 
@@ -12,7 +24,7 @@ function ClearChildren() {
 function DrawMainMenuButtons(Buttons) {
     // Make new container for buttons
     var buttonContainer = document.createElement("div");
-    originalDiv
+    mainDiv
         .appendChild(buttonContainer);
 
     Buttons.forEach(function (MainMenuButtonClass, buttonIndex, buttonArray) {
@@ -37,13 +49,12 @@ function DrawMainMenuButtons(Buttons) {
 
 // Give the array of buttons, SelectClass, and the next function
 function DrawButtons(Buttons, Selection, NextFunction, OldFunction) {
-    // Make new container for buttons
-    var buttonContainer = document.createElement("div");
-    originalDiv
-        .appendChild(buttonContainer);
 
     Buttons.forEach(function (ButtonClass, buttonIndex, buttonArray) {
         // add button details
+        var container = document.createElement("div");
+        container.className = "grid-item";
+        mainDiv.append(container);
         var button = document.createElement("button");
 
         // Selected buttons will be highlighted
@@ -67,7 +78,7 @@ function DrawButtons(Buttons, Selection, NextFunction, OldFunction) {
         );
 
         // Append buttons
-        buttonContainer.append(button);
+        container.append(button);
 
         // Draw back button only once
         if (buttonIndex === 0) {
@@ -83,9 +94,12 @@ function DrawButtons(Buttons, Selection, NextFunction, OldFunction) {
 
 function DrawNextButton(NextFunction) {
     // Print Next button
+    var containerDiv = document.createElement("div");
+    containerDiv.className = "grid-item";
+    buttonDiv.append(containerDiv);
     var nextButton = document.createElement("button");
     nextButton.textContent = "Next";
-    nextButton.className = "btn-primary";
+    nextButton.className = "btn-primary navigationButton";
     nextButton.addEventListener(
         'click',
         function () {
@@ -93,14 +107,17 @@ function DrawNextButton(NextFunction) {
         }
     );
 
-    originalDiv.append(nextButton);
+    containerDiv.append(nextButton);
 }
 
 function DrawBackButton(OldFunction) {
     // Print Back button
+    var containerDiv = document.createElement("div");
+    containerDiv.className = "grid-item";
+    buttonDiv.append(containerDiv);
     var backButton = document.createElement("button");
     backButton.textContent = "Back";
-    backButton.className = "btn-primary";
+    backButton.className = "btn-primary navigationButton";
     backButton.addEventListener(
         'click',
         function () {
@@ -108,7 +125,7 @@ function DrawBackButton(OldFunction) {
         }
     );
 
-    originalDiv.append(backButton);
+    containerDiv.append(backButton);
 }
 
 function SummaryForCommission() {
@@ -134,8 +151,7 @@ function SummaryForCommission() {
     else {
         FinishedCommissionOrder.Background = "Emoji";
         // Fifth emoji is free
-        if(QuantitySelected.selectedItem === 4)
-        {
+        if (QuantitySelected.selectedItem === 4) {
             FinishedCommissionOrder.Price -= QualitySelected.price;
         }
     }
@@ -144,24 +160,25 @@ function SummaryForCommission() {
         FinishedCommissionOrder.Price = FinishedCommissionOrder.Price * ((100 - DiscountPercentage) / 100);
         FinishedCommissionOrder.Note = "Discount: " + DiscountPercentage + "%";
     }
+
+    // remove decimals
+    FinishedCommissionOrder.Price = FinishedCommissionOrder.Price.toFixed(2)
 }
 
 function DrawSummary() {
-    var p = document.createElement("p");
-    p.textContent = "Quality: " + QualityButtons[QualitySelected.selectedItem].buttonText + ", price: " + QualitySelected.price + " $\n";
-    p.textContent += "Quantity: " + QuantityButtons[QuantitySelected.selectedItem].buttonText + ", price: " + QuantitySelected.price + " x\n";
+    DrawLineOfPrice("Quality", QualityButtons[QualitySelected.selectedItem].buttonText, QualitySelected.price);
+    DrawLineOfPriceX("Quantity", QuantityButtons[QuantitySelected.selectedItem].buttonText, QuantitySelected.price);
 
     // If emoji commissions not selected
     if (QualitySelected.selectedItem != 0) {
-        p.textContent += "Background: " + BackgroundButtons[BackgroundSelected.selectedItem].buttonText + ", price: " + BackgroundSelected.price + " $\n";
+        DrawLineOfPrice("Background", BackgroundButtons[BackgroundSelected.selectedItem].buttonText, BackgroundSelected.price);
     }
 
     if (DiscountPercentage != 0) {
-        p.textContent += "Discount: " + DiscountPercentage + "%, Discounted: " + ((FinishedCommissionOrder.Price / ((100 - DiscountPercentage) / 100) * (DiscountPercentage / 100)) + " $\n");
+        DrawDiscountLine();
     }
-    p.textContent += "Total: " + FinishedCommissionOrder.Price + " $\n";
 
-    originalDiv.append(p);
+    DrawTotalLine();
 
     // If emoji commissions not selected
     if (QualitySelected.selectedItem != 0) {
@@ -174,8 +191,33 @@ function DrawSummary() {
     DrawNextButton(DrawAskFinalDetails);
 }
 
-function DrawFinalDetails () {
-    var userNameInput = document.createElement("input");
+function DrawLineOfPrice(text, description, price) {
+    var p = document.createElement("p");
+    p.textContent = text + ": " + description + ", price: " + price + "$";
+    mainDiv.append(p);
+}
+
+function DrawLineOfPriceX(text, description, price) {
+    var p = document.createElement("p");
+    p.textContent = text + ": " + description + ", price: " + price + "x";
+    mainDiv.append(p);
+}
+
+function DrawDiscountLine() {
+    var p = document.createElement("p");
+    p.style.color = "red";
+    p.textContent += "Discount: " + DiscountPercentage + "%, Discounted: " + ((FinishedCommissionOrder.Price / ((100 - DiscountPercentage) / 100) * (DiscountPercentage / 100)).toFixed(2) + " $\n");
+    secondDiv.append(p);
+}
+
+function DrawTotalLine() {
+    var p = document.createElement("p");
+    p.textContent += "Total: " + FinishedCommissionOrder.Price + "$\n";
+    mainDiv.append(p);
+}
+
+function DrawFinalDetails() {
+    var userNameInput = document.createElement("textarea");
     userNameInput.id = "UserNameInputID";
     userNameInput.placeholder = "Username";
 
@@ -191,9 +233,9 @@ function DrawFinalDetails () {
         }
     );
 
-    originalDiv.append(userNameInput);
+    secondDiv.append(userNameInput);
 
-    var descriptionInput = document.createElement("input");
+    var descriptionInput = document.createElement("textarea");
     descriptionInput.id = "DescriptionInputID";
     descriptionInput.placeholder = "Decription";
 
@@ -210,10 +252,10 @@ function DrawFinalDetails () {
         }
     );
 
-    originalDiv.append(descriptionInput);
+    mainDiv.append(descriptionInput);
 }
 
-function DrawFinish () {
+function DrawFinish() {
     var orderButton = document.createElement("button");
     orderButton.textContent = "Make Order";
     orderButton.className = "btn-danger";
@@ -230,5 +272,12 @@ function DrawFinish () {
         }
     );
 
-    originalDiv.append(orderButton);
+    mainDiv.append(orderButton);
+}
+
+function DrawNoteForUserData() {
+    var p = document.createElement("p");
+    p.style.color = "red";
+    p.textContent += "Note: Username and picture details will be public in queue.";
+    secondDiv.append(p);
 }

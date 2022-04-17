@@ -1,4 +1,6 @@
-var originalDiv = document.getElementById("mainDiv");
+var mainDiv = document.getElementById("mainDiv");
+var secondDiv = document.getElementById("secondDiv");
+var buttonDiv = document.getElementById("buttonDiv");
 var commissionOrder = new CommissionOrder();
 
 function DrawMainMenu() {
@@ -57,11 +59,12 @@ function DrawAskFinalDetails() {
 function DrawFinishOrder() {
     ClearChildren();
 
-    DrawBackButton(DrawAskFinalDetails);
     DrawFinish();
+    DrawNoteForUserData();
+    DrawBackButton(DrawAskFinalDetails);
     
     // If there are no given username
-    if (FinishedCommissionOrder.Username == null) {
+    if (FinishedCommissionOrder.Username == null || FinishedCommissionOrder.Username == "") {
         alert("Please give a proper username");
         DrawAskFinalDetails();
     }

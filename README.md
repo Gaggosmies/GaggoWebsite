@@ -13,15 +13,11 @@ Todo:
 - [ ] Fix API calls
 
 - [ ] Make array for orders (multiple orders at the same time)
-- [ ] Make view for order summary
 
-- [ ] "?" Logo shows which user data will be collected and shown (username and order)
 - [ ] Add "I've read ToS" before Ordering can commence
-- [ ] 2 Divs, mainDiv and secondaryDiv?
 
 - [ ] Username red unless name given? 
 - [ ] Checkbox for setting username anonymous?
-- [ ] Big Screen to write details
 
 - [ ] ToS on mainmenu
 
@@ -39,3 +35,7 @@ Done:
 - [x] Add note for internal notes (in database)
 - [x] Set note if discount given
 - [x] Add auto incrementation of ID 
+- [x] Big Screen to write details
+- [x] 2 Divs, mainDiv and secondaryDiv?
+- [x] Make view for order summary
+- [x] "?" Logo shows which user data will be collected and shown (username and order)
