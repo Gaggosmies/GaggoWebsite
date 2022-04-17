@@ -146,7 +146,7 @@ function DrawBackButton(OldFunction) {
     buttonDiv.append(containerDiv);
     var backButton = document.createElement("button");
     backButton.textContent = "Back";
-    backButton.className = "btn-primary navigationButton";
+    backButton.className = "btn-outline-primary navigationButton";
     backButton.addEventListener(
         'click',
         function () {
@@ -327,13 +327,8 @@ function DrawNoteForPriceMultiply(text, price) {
     secondDiv.append(p);
 }
 
-function DrawToSScreen() {
-    var p = document.createElement("p");
-    p.textContent += "ToS Stuff goes here (work in progress)";
-    mainDiv.append(p);
-}
-
 function DrawQueueScreen() {
+    GetQueue();
     var p = document.createElement("p");
     p.textContent += "Queue Stuff goes here (work in progress)";
     mainDiv.append(p);
@@ -362,4 +357,8 @@ function DrawFeedbackScreen() {
     );
 
     buttonDiv.append(feedbackButton);
+}
+
+function OpenToS() {
+    window.open(ToSLink);
 }
