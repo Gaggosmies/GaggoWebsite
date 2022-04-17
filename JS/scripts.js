@@ -75,7 +75,7 @@ function DrawButtons(Buttons, Selection, NextFunction, OldFunction) {
         }
 
         // Draw next button if item has been selected
-        if (Selection.selectedItem === buttonArray[buttonIndex]) {
+        if (Selection.selectedItem === buttonIndex) {
             DrawNextButton(NextFunction);
         }
     });
@@ -144,4 +144,91 @@ function SummaryForCommission() {
         FinishedCommissionOrder.Price = FinishedCommissionOrder.Price * ((100 - DiscountPercentage) / 100);
         FinishedCommissionOrder.Note = "Discount: " + DiscountPercentage + "%";
     }
+}
+
+function DrawSummary() {
+    var p = document.createElement("p");
+    p.textContent = "Quality: " + QualityButtons[QualitySelected.selectedItem].buttonText + ", price: " + QualitySelected.price + " $\n";
+    p.textContent += "Quantity: " + QuantityButtons[QuantitySelected.selectedItem].buttonText + ", price: " + QuantitySelected.price + " x\n";
+
+    // If emoji commissions not selected
+    if (QualitySelected.selectedItem != 0) {
+        p.textContent += "Background: " + BackgroundButtons[BackgroundSelected.selectedItem].buttonText + ", price: " + BackgroundSelected.price + " $\n";
+    }
+
+    if (DiscountPercentage != 0) {
+        p.textContent += "Discount: " + DiscountPercentage + "%, Discounted: " + ((FinishedCommissionOrder.Price / ((100 - DiscountPercentage) / 100) * (DiscountPercentage / 100)) + " $\n");
+    }
+    p.textContent += "Total: " + FinishedCommissionOrder.Price + " $\n";
+
+    originalDiv.append(p);
+
+    // If emoji commissions not selected
+    if (QualitySelected.selectedItem != 0) {
+        DrawBackButton(DrawBackgroundMenu);
+    }
+    else {
+        DrawBackButton(DrawQuantityMenu);
+    }
+
+    DrawNextButton(DrawAskFinalDetails);
+}
+
+function DrawFinalDetails () {
+    var userNameInput = document.createElement("input");
+    userNameInput.id = "UserNameInputID";
+    userNameInput.placeholder = "Username";
+
+    // If there was something inputted already
+    if (FinishedCommissionOrder.Username != null) {
+        userNameInput.value = FinishedCommissionOrder.Username;
+    }
+
+    userNameInput.addEventListener(
+        'change',
+        function () {
+            FinishedCommissionOrder.Username = userNameInput.value;
+        }
+    );
+
+    originalDiv.append(userNameInput);
+
+    var descriptionInput = document.createElement("input");
+    descriptionInput.id = "DescriptionInputID";
+    descriptionInput.placeholder = "Decription";
+
+    // If there was something inputted already
+    if (FinishedCommissionOrder.Description != null) {
+        descriptionInput.value = FinishedCommissionOrder.Description;
+    }
+
+
+    descriptionInput.addEventListener(
+        'change',
+        function () {
+            FinishedCommissionOrder.Description = descriptionInput.value;
+        }
+    );
+
+    originalDiv.append(descriptionInput);
+}
+
+function DrawFinish () {
+    var orderButton = document.createElement("button");
+    orderButton.textContent = "Make Order";
+    orderButton.className = "btn-danger";
+    orderButton.addEventListener(
+        'click',
+        function () {
+            PostFinishedOrder(FinishedCommissionOrder)
+            alert("Order Sent!");
+            QualitySelected = new SelectClass;
+            QuantitySelected = new SelectClass;
+            BackgroundSelected = new SelectClass;
+            FinishedCommissionOrder = new CommissionOrder;
+            DrawMainMenu();
+        }
+    );
+
+    originalDiv.append(orderButton);
 }
