@@ -9,6 +9,7 @@ to install all the node modules into your local computer.
 
 Todo: 
 - [ ] Fix API calls
+- [ ] API call for feedback -> send stuff to same database but different sheet
 
 - [ ] Make array for orders (multiple orders at the same time)?
 

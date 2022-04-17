@@ -9,6 +9,8 @@ function DrawMainMenu() {
     DrawMainMenuButtons("Order Here", "btn-primary", DrawReadToS);
     DrawMainMenuButtons("Queue", "btn-secondary", DrawQueue);
     DrawMainMenuButtons("ToS", "btn-danger", DrawToS);
+
+    DrawMainMenuButtons("Feedback", "btn-warning", DrawFeedback);
 }
 
 DrawMainMenu();
@@ -89,6 +91,14 @@ function DrawQueue() {
     ClearChildren();
 
     DrawQueueScreen();
+
+    DrawBackButton(DrawMainMenu);
+}
+
+function DrawFeedback() {
+    ClearChildren();
+
+    DrawFeedbackScreen();
 
     DrawBackButton(DrawMainMenu);
 }

@@ -85,7 +85,7 @@ function DrawButtons(Buttons, Selection, NextFunction, OldFunction) {
             }
         );
 
-        if (OldFunction === DrawQualityMenu){
+        if (OldFunction === DrawQualityMenu) {
             button.addEventListener(
                 'mouseenter',
                 function () {
@@ -94,7 +94,7 @@ function DrawButtons(Buttons, Selection, NextFunction, OldFunction) {
                 }
             );
         }
-        else{
+        else {
             button.addEventListener(
                 'mouseenter',
                 function () {
@@ -104,7 +104,7 @@ function DrawButtons(Buttons, Selection, NextFunction, OldFunction) {
             );
         }
 
-        
+
 
         // Append buttons
         container.append(button);
@@ -315,26 +315,64 @@ function DrawNoteForUser(text) {
 
 function DrawNoteForPrice(text, price) {
     var p = document.createElement("p");
-    p.textContent += text + ": "+ price;
+    p.textContent += text + ": " + price;
     p.textContent += "$";
     secondDiv.append(p);
 }
 
 function DrawNoteForPriceMultiply(text, price) {
     var p = document.createElement("p");
-    p.textContent += text + ": "+ price;
+    p.textContent += text + ": " + price;
     p.textContent += "x";
     secondDiv.append(p);
 }
 
 function DrawToSScreen() {
     var p = document.createElement("p");
-    p.textContent += "ToS Stuff goes here";
+    p.textContent += "ToS Stuff goes here (work in progress)";
     mainDiv.append(p);
 }
 
 function DrawQueueScreen() {
     var p = document.createElement("p");
-    p.textContent += "Queue Stuff goes here";
+    p.textContent += "Queue Stuff goes here (work in progress)";
     mainDiv.append(p);
+}
+
+function DrawFeedbackScreen() {
+    var p = document.createElement("p");
+    p.textContent += "Give feedback for the website (not working yet)";
+    secondDiv.append(p);
+
+    var feedbackInput = document.createElement("textarea");
+    feedbackInput.placeholder = "Feedback";
+
+    feedbackInput.addEventListener(
+        'change',
+        function () {
+            FinishedCommissionOrder.Username = feedbackInput.value;
+        }
+    );
+
+    mainDiv.append(feedbackInput);
+
+    var feedbackButton = document.createElement("button");
+    feedbackButton.textContent = "Send feedback";
+    feedbackButton.className = "btn-danger navigationButton";
+    feedbackButton.addEventListener(
+        'click',
+        function () {
+            PostFeedback(feedbackInput.value)
+            // alert("Feedback Sent!");
+            alert("Feedback not set yet!");
+            DrawMainMenu();
+        }
+    );
+
+    buttonDiv.append(feedbackButton);
+}
+
+function PostFeedback (feedback) {
+    // send to database but different tab?
+    console.log(feedback);
 }
