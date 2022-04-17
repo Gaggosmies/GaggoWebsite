@@ -15,11 +15,14 @@ function GetQueue() {
         });
 }
 
-const GetCommissionCount = async() => {
+const GetCommissionCountForId = async () => {
     try {
         const resp = await axios.get(APIurl + "/count");
         FinishedCommissionOrder.id = resp.data.rows + 1;
-        console.log(FinishedCommissionOrder.id);
+        DrawFinish();
+        DrawBackButton(DrawAskFinalDetails);
+        ClearSecondChildern();
+        DrawNoteForUser("Note: Username and picture details will be public in queue.");
     } catch (err) {
         console.error(err);
     }
@@ -28,7 +31,7 @@ const GetCommissionCount = async() => {
 function PostFinishedOrder(Order) {
     const date = new Date();
     var dateNow = date.getFullYear().toString() + "/" + ('0' + (date.getMonth() + 1)).slice(-2).toString() + "/" + ('0' + date.getDate()).slice(-2).toString() + "-" + ('0' + date.getHours()).slice(-2).toString() + ':' + ('0' + date.getMinutes()).slice(-2).toString();
-    
+
     axios.post(APIurl, {
         "data": {
             // was there some API call for count?
@@ -48,7 +51,7 @@ function PostFinishedOrder(Order) {
     });
 }
 
-function PostFeedback (feedback) {
+function PostFeedback(feedback) {
     const date = new Date();
     var dateNow = date.getFullYear().toString() + "/" + ('0' + (date.getMonth() + 1)).slice(-2).toString() + "/" + ('0' + date.getDate()).slice(-2).toString() + "-" + ('0' + date.getHours()).slice(-2).toString() + ':' + ('0' + date.getMinutes()).slice(-2).toString();
 

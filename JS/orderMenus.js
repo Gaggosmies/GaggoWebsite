@@ -71,11 +71,10 @@ function DrawFinishOrder() {
     // sets out the id of the commission, not the best place for it but it should have enough time to register if it's here. 
     // If there are two of the same ids, it's because two users made their commissions at the same time and this one couldn't update on time.
     // It should be very unlikely though in real life.
-    GetCommissionCount();
+    DrawNoteForUser("Loading...");
+    
+    GetCommissionCountForId();
 
-    DrawFinish();
-    DrawNoteForUser("Note: Username and picture details will be public in queue.");
-    DrawBackButton(DrawAskFinalDetails);
 
     // If there are no given username
     if (FinishedCommissionOrder.Username == null || FinishedCommissionOrder.Username == "") {
