@@ -10,9 +10,7 @@ to install all the node modules into your local computer.
 Todo: 
 - [ ] Fix API calls
 
-- [ ] Make array for orders (multiple orders at the same time)
-
-- [ ] Add background
+- [ ] Make array for orders (multiple orders at the same time)?
 
 - [ ] Username red unless name given? 
 - [ ] Checkbox for setting username anonymous?
@@ -40,3 +38,4 @@ Done:
 - [x] Add "I've read ToS" before Ordering can commence
 - [x] ToS on mainmenu
 - [x] Hover shows price
+- [x] Add background
