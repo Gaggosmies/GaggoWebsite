@@ -82,6 +82,8 @@ function DrawFinishOrder() {
 function DrawQueue() {
     ClearChildren();
 
+    DrawNoteForUser("Loading...");
+
     DrawQueueScreen();
 
     DrawBackButton(DrawMainMenu);
@@ -90,7 +92,7 @@ function DrawQueue() {
 function DrawFeedback() {
     ClearChildren();
 
-    DrawFeedbackScreen();
-
     DrawBackButton(DrawMainMenu);
+
+    DrawFeedbackScreen();
 }

@@ -6,7 +6,12 @@ body {
 h1 {
         font-weight: bold;
         text-align: center;
+        color: darkblue;
         font-family: 'Courier New', Courier, monospace;
+}
+
+h1 span {
+        background-color: aliceblue;
 }
 
 .grid-container {
@@ -66,4 +71,44 @@ button {
         height: 90px;
         width: 180px;
         border: 1px solid;
+}
+
+.grid-queue-container {
+        display: grid;
+        gap: 10px;
+        background-color: #fdef6b;
+        padding: 10px;
+        height: 70%;
+        width: 70%;
+        text-align: center;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+}
+
+.grid-queue-item {
+        background-color: aliceblue;
+        text-align: center;
+        font-size: 30px;
+}
+
+.grid-queue-1 {
+        width: 550px;
+        height: 200px;
+        grid-column: 1;
+        grid-row: 1;
+}
+
+.grid-queue-2 {
+        width: 550px;
+        height: 200px;
+        grid-column: 1;
+        grid-row: 2;
+}
+
+div {
+        overflow-y: auto
 }

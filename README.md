@@ -8,16 +8,11 @@ to install all the node modules into your local computer.
 ---
 
 Todo: 
-- [ ] Fix API calls
-- [ ] API call for feedback -> send stuff to same database but different sheet
-
 - [ ] Make array for orders (multiple orders at the same time)?
 
 - [ ] Username red unless name given? 
 - [ ] Checkbox for setting username anonymous?
 
-- [ ] Draw ToS
-- [ ] Add listview of accepted commissions (queue)
 - [ ] Add listview of pending commissions (accept or decline)
 - [ ] Add listview of accepted commissions
 - [ ] Add listview of rejected commissions
@@ -40,3 +35,7 @@ Done:
 - [x] ToS on mainmenu
 - [x] Hover shows price
 - [x] Add background
+- [x] Fix API calls
+- [x] API call for feedback -> send stuff to same database but different sheet
+- [x] Draw ToS
+- [x] Add listview of accepted commissions (queue)

@@ -1,10 +1,11 @@
 var APIurl = 'https://sheetdb.io/api/v1/vehbaa8eppm85';
 
 
-function GetFinishedCommissions() {
-    axios.get(APIurl + '/search?Status=Done')
+function GetQueue() {
+    axios.get(APIurl + '/search?Status[]=!Rejected&Status[]=!Done')
         .then(function (response) {
-            console.log(response);
+            DrawQueueLines(response.data);
+            ClearSecondChildern();
         })
         .catch(function (error) {
             console.log(error);

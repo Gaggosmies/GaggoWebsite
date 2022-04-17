@@ -329,14 +329,49 @@ function DrawNoteForPriceMultiply(text, price) {
 
 function DrawQueueScreen() {
     GetQueue();
-    var p = document.createElement("p");
-    p.textContent += "Queue Stuff goes here (work in progress)";
-    mainDiv.append(p);
+}
+
+function DrawQueueLines(queueObjects) {
+    var queueContainer = document.createElement("div");
+    mainDiv.append(queueContainer);
+
+    var acceptedText = document.createElement("h2");
+    acceptedText.textContent = "Accepted commissions";
+    queueContainer.append(acceptedText);
+
+    var queueAccepted = document.createElement('div');
+    queueAccepted.className = "grid-queue-item grid-queue-1";
+    queueContainer.append(queueAccepted);
+
+    var pendingText = document.createElement("h2");
+    pendingText.textContent = "Pending commissions";
+    queueContainer.append(pendingText);
+
+    var queuePending = document.createElement('div');
+    queuePending.className = "grid-queue-item grid-queue-2";
+    queueContainer.append(queuePending);
+
+    queueObjects.forEach(function (CommissionOrder, CommissionIndex, CommissionArray) {
+        var p = document.createElement("p");
+        p.textContent += CommissionArray[CommissionIndex].Username;
+        p.textContent += ": "
+        p.textContent += CommissionArray[CommissionIndex].Quality;
+        p.textContent += " ";
+        p.textContent += CommissionArray[CommissionIndex].CharacterQuantity;
+        p.textContent += " character pic";
+
+        if (CommissionArray[CommissionIndex].Status === "Pending"){
+            queuePending.append(p);
+        }
+        else {
+            queueAccepted.append(p);
+        }
+    })
 }
 
 function DrawFeedbackScreen() {
     var p = document.createElement("p");
-    p.textContent += "Give feedback for the website";
+    p.textContent += "Give feedback for the website (If feedback is used, you might receive free Emojis! Include your username in feedback if you'd like)";
     secondDiv.append(p);
 
     var feedbackInput = document.createElement("textarea");
