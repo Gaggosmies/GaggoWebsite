@@ -3,6 +3,7 @@ const ToSLink = "https://docs.google.com/document/d/1EuS6WfqWhpsZZjJNc7dZYsk3IhR
 
 var QualityButtons = [
     new ButtonClass("Emoji", 5),
+    new ButtonClass("Medallion", 7),
     new ButtonClass("Flat", 13),
     new ButtonClass("Shaded", 20),
     new ButtonClass("Shaded + Highlight", 25),

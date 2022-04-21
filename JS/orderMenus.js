@@ -38,8 +38,8 @@ function DrawQuantityMenu() {
 function DrawBackgroundMenu() {
     ClearChildren();
 
-    // If emoji commissions selected
-    if (QualitySelected.selectedItem === 0) {
+    // If emoji or medallion commissions selected
+    if (QualitySelected.selectedItem <= 1) {
         DrawSummaryMenu();
     }
     else {
@@ -68,13 +68,9 @@ function DrawAskFinalDetails() {
 function DrawFinishOrder() {
     ClearChildren();
 
-    // sets out the id of the commission, not the best place for it but it should have enough time to register if it's here. 
-    // If there are two of the same ids, it's because two users made their commissions at the same time and this one couldn't update on time.
-    // It should be very unlikely though in real life.
     DrawNoteForUser("Loading...");
     
     GetCommissionCountForId();
-
 
     // If there are no given username
     if (FinishedCommissionOrder.Username == null || FinishedCommissionOrder.Username == "") {

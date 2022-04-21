@@ -166,18 +166,22 @@ function SummaryForCommission() {
     FinishedCommissionOrder.Date = dateNow;
     FinishedCommissionOrder.Price = (QualitySelected.price * QuantitySelected.price)
 
-    // If emoji commissions not selected
-    if (QualitySelected.selectedItem != 0) {
-        FinishedCommissionOrder.Background = BackgroundButtons[BackgroundSelected.selectedItem].buttonText;
-        FinishedCommissionOrder.Price += BackgroundSelected.price;
+    // If medallion commissions selected
+    if (QualitySelected.selectedItem === 1) {
+        FinishedCommissionOrder.Background = "Medallion";
     }
     // If emoji commissions selected
-    else {
+    else if (QualitySelected.selectedItem === 0) {
         FinishedCommissionOrder.Background = "Emoji";
         // Fifth emoji is free
         if (QuantitySelected.selectedItem === 4) {
             FinishedCommissionOrder.Price -= QualitySelected.price;
         }
+    }
+    // If no special commission selected
+    else {
+        FinishedCommissionOrder.Background = BackgroundButtons[BackgroundSelected.selectedItem].buttonText;
+        FinishedCommissionOrder.Price += BackgroundSelected.price;
     }
 
     if (DiscountPercentage != 0) {
@@ -193,8 +197,8 @@ function DrawSummary() {
     DrawLineOfPrice("Quality", QualityButtons[QualitySelected.selectedItem].buttonText, QualitySelected.price);
     DrawLineOfPriceX("Quantity", QuantityButtons[QuantitySelected.selectedItem].buttonText, QuantitySelected.price);
 
-    // If emoji commissions not selected
-    if (QualitySelected.selectedItem != 0) {
+    // If emoji or medallion commissions not selected
+    if (QualitySelected.selectedItem > 1) {
         DrawLineOfPrice("Background", BackgroundButtons[BackgroundSelected.selectedItem].buttonText, BackgroundSelected.price);
     }
 
@@ -204,8 +208,8 @@ function DrawSummary() {
 
     DrawTotalLine();
 
-    // If emoji commissions not selected
-    if (QualitySelected.selectedItem != 0) {
+    // If emoji or medallion commissions not selected
+    if (QualitySelected.selectedItem > 1) {
         DrawBackButton(DrawBackgroundMenu);
     }
     else {
@@ -364,7 +368,7 @@ function DrawQueueLines(queueObjects) {
         p.textContent += CommissionArray[CommissionIndex].CharacterQuantity;
         p.textContent += " character(s)";
 
-        if (CommissionArray[CommissionIndex].Status === "Pending"){
+        if (CommissionArray[CommissionIndex].Status === "Pending") {
             queuePending.append(p);
         }
         else {
