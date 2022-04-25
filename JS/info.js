@@ -1,4 +1,4 @@
-const DiscountPercentage = 20;
+const DiscountPercentage = 0;
 const ToSLink = "https://docs.google.com/document/d/1EuS6WfqWhpsZZjJNc7dZYsk3IhRQELtJG745flm9J0E/edit?usp=sharing"
 
 var QualityButtons = [
