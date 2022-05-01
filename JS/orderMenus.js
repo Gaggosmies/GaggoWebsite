@@ -32,14 +32,20 @@ function DrawQualityMenu() {
 
 function DrawQuantityMenu() {
     ClearChildren();
-    DrawButtons(QuantityButtons, QuantitySelected, DrawBackgroundMenu, DrawQualityMenu, "Choose amount of characters");
+    // If comic selected
+    if (QualityButtons[QualitySelected.selectedItem].buttonText == "Comic") {
+
+    }
+    else {
+        DrawButtons(QuantityButtons, QuantitySelected, DrawBackgroundMenu, DrawQualityMenu, "Choose amount of characters");
+    }
 }
 
 function DrawBackgroundMenu() {
     ClearChildren();
 
     // If emoji or medallion commissions selected
-    if (QualitySelected.selectedItem <= 1) {
+    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji" || QualityButtons[QualitySelected.selectedItem].buttonText === "Medallion") {
         DrawSummaryMenu();
     }
     else {
@@ -69,7 +75,7 @@ function DrawFinishOrder() {
     ClearChildren();
 
     DrawNoteForUser("Loading...");
-    
+
     GetCommissionCountForId();
 
     // If there are no given username

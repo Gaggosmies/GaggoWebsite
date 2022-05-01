@@ -166,11 +166,11 @@ function SummaryForCommission() {
     FinishedCommissionOrder.Price = (QualitySelected.price * QuantitySelected.price)
 
     // If medallion commissions selected
-    if (QualitySelected.selectedItem === 1) {
+    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Medallion") {
         FinishedCommissionOrder.Background = "Medallion";
     }
     // If emoji commissions selected
-    else if (QualitySelected.selectedItem === 0) {
+    else if (QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji") {
         FinishedCommissionOrder.Background = "Emoji";
         // Fifth emoji is free
         if (QuantitySelected.selectedItem === 4) {
@@ -196,8 +196,11 @@ function DrawSummary() {
     DrawLineOfPrice("Quality", QualityButtons[QualitySelected.selectedItem].buttonText, QualitySelected.price);
     DrawLineOfPriceX("Quantity", QuantityButtons[QuantitySelected.selectedItem].buttonText, QuantitySelected.price);
 
-    // If emoji or medallion commissions not selected
-    if (QualitySelected.selectedItem > 1) {
+    // If emoji or medallion commissions selected
+    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Medallion" || QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji") {
+        // Do nothing
+    }
+    else {
         DrawLineOfPrice("Background", BackgroundButtons[BackgroundSelected.selectedItem].buttonText, BackgroundSelected.price);
     }
 
@@ -207,12 +210,12 @@ function DrawSummary() {
 
     DrawTotalLine();
 
-    // If emoji or medallion commissions not selected
-    if (QualitySelected.selectedItem > 1) {
-        DrawBackButton(DrawBackgroundMenu);
+    // If emoji or medallion commissions selected
+    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Medallion" || QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji") {
+        DrawBackButton(DrawQuantityMenu);
     }
     else {
-        DrawBackButton(DrawQuantityMenu);
+        DrawBackButton(DrawBackgroundMenu);
     }
 
     DrawNextButton(DrawAskFinalDetails);
@@ -264,6 +267,7 @@ function DrawFinalDetails() {
 
     var descriptionInput = document.createElement("textarea");
     descriptionInput.id = "DescriptionInputID";
+    descriptionInput.className = "grid-item";
     descriptionInput.placeholder = "Description";
 
     // If there was something inputted already
@@ -370,7 +374,7 @@ function DrawQueueLines(queueObjects) {
         if (CommissionArray[CommissionIndex].Status === "Pending") {
             queuePending.append(p);
         }
-        else if(CommissionArray[CommissionIndex].Status === "Expected") {
+        else if (CommissionArray[CommissionIndex].Status === "Expected") {
             DrawMenuDescription("Current expected commission wait time: " + CommissionArray[CommissionIndex].Username);
         }
         else {
