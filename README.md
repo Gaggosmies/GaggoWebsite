@@ -10,6 +10,9 @@ to install all the node modules into your local computer.
 Todo: 
 - [ ] Make array for orders (multiple orders at the same time)?
 
+- [ ] Add Comic quality -> goes to "insert budget" price
+- [ ] Make code more readable (check Discord #R1)
+
 - [ ] Username red unless name given? 
 - [ ] Checkbox for setting username anonymous?
 
@@ -39,3 +42,4 @@ Done:
 - [x] API call for feedback -> send stuff to same database but different sheet
 - [x] Draw ToS
 - [x] Add listview of accepted commissions (queue)
+- [x] Mobile and Desktop support? Mobile: 16:9, Desktop: 4:3 I think?
