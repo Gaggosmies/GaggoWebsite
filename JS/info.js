@@ -6,7 +6,7 @@ var QualityButtons = [
     new ButtonClass("Medallion", 7),
     new ButtonClass("Flat", 13),
     new ButtonClass("Shaded", 20),
-    new ButtonClass("Shaded + Highlight", 25),
+    new ButtonClass("+ Highlight", 25),
 ];
 
 var QualitySelected = new SelectClass;

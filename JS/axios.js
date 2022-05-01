@@ -4,8 +4,8 @@ var APIurl = 'https://sheetdb.io/api/v1/vehbaa8eppm85';
 function GetQueue() {
     axios.get(APIurl + '/search?Status[]=!Rejected&Status[]=!Done')
         .then(function (response) {
-            DrawQueueLines(response.data);
             ClearSecondChildern();
+            DrawQueueLines(response.data);
         })
         .catch(function (error) {
             console.log(error);

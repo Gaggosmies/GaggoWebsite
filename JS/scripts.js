@@ -109,8 +109,9 @@ function DrawButtons(Buttons, Selection, NextFunction, OldFunction, description)
         // Append button
         container.append(button);
 
-        // Draw back button only once
+        // Draw back button and description only once
         if (buttonIndex === 0) {
+            DrawMenuDescription(description);
             DrawBackButton(OldFunction);
         }
 
@@ -124,7 +125,6 @@ function DrawButtons(Buttons, Selection, NextFunction, OldFunction, description)
 function DrawNextButton(NextFunction) {
     // Print Next button
     var containerDiv = document.createElement("div");
-    containerDiv.className = "grid-item";
     buttonDiv.append(containerDiv);
     var nextButton = document.createElement("button");
     nextButton.textContent = "Next";
@@ -142,7 +142,6 @@ function DrawNextButton(NextFunction) {
 function DrawBackButton(OldFunction) {
     // Print Back button
     var containerDiv = document.createElement("div");
-    containerDiv.className = "grid-item";
     buttonDiv.append(containerDiv);
     var backButton = document.createElement("button");
     backButton.textContent = "Back";
@@ -370,6 +369,9 @@ function DrawQueueLines(queueObjects) {
 
         if (CommissionArray[CommissionIndex].Status === "Pending") {
             queuePending.append(p);
+        }
+        else if(CommissionArray[CommissionIndex].Status === "Expected") {
+            DrawMenuDescription("Current expected commission wait time: " + CommissionArray[CommissionIndex].Username);
         }
         else {
             queueAccepted.append(p);
