@@ -413,8 +413,10 @@ function DrawQueueLines(queueObjects) {
         p.textContent += ": "
         p.textContent += CommissionArray[CommissionIndex].Quality;
         p.textContent += " ";
-        p.textContent += CommissionArray[CommissionIndex].CharacterQuantity;
-        p.textContent += " character(s)";
+        if (CommissionArray[CommissionIndex].Quality != "Comic") {
+            p.textContent += CommissionArray[CommissionIndex].CharacterQuantity;
+            p.textContent += " character(s)";
+        }
 
         if (CommissionArray[CommissionIndex].Status === "Pending") {
             queuePending.append(p);
