@@ -166,11 +166,11 @@ function SummaryForCommission() {
     FinishedCommissionOrder.Price = (QualitySelected.price * QuantitySelected.price)
 
     // If medallion commissions selected
-    if (QualitySelected.selectedItem === 1) {
+    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Medallion") {
         FinishedCommissionOrder.Background = "Medallion";
     }
     // If emoji commissions selected
-    else if (QualitySelected.selectedItem === 0) {
+    else if (QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji") {
         FinishedCommissionOrder.Background = "Emoji";
         // Fifth emoji is free
         if (QuantitySelected.selectedItem === 4) {
@@ -192,12 +192,31 @@ function SummaryForCommission() {
     FinishedCommissionOrder.Price = FinishedCommissionOrder.Price.toFixed(2)
 }
 
+function SummaryForCommissionComic() {
+    const date = new Date();
+    var dateNow = date.getFullYear().toString() + "/" + ('0' + (date.getMonth() + 1)).slice(-2).toString() + "/" + ('0' + date.getDate()).slice(-2).toString() + "-" + ('0' + date.getHours()).slice(-2).toString() + ':' + ('0' + date.getMinutes()).slice(-2).toString();
+
+    FinishedCommissionOrder.Quality = QualityButtons[QualitySelected.selectedItem].buttonText;
+    FinishedCommissionOrder.Quantity = "Comic";
+    FinishedCommissionOrder.Background = "Comic";
+    FinishedCommissionOrder.Date = dateNow;
+    // Price gotten from input - can be normal text too
+    FinishedCommissionOrder.Price = FinishedCommissionOrder.Price;
+
+    if (DiscountPercentage != 0) {
+        FinishedCommissionOrder.Note = "Discount: " + DiscountPercentage + "%";
+    }
+}
+
 function DrawSummary() {
     DrawLineOfPrice("Quality", QualityButtons[QualitySelected.selectedItem].buttonText, QualitySelected.price);
     DrawLineOfPriceX("Quantity", QuantityButtons[QuantitySelected.selectedItem].buttonText, QuantitySelected.price);
 
-    // If emoji or medallion commissions not selected
-    if (QualitySelected.selectedItem > 1) {
+    // If emoji or medallion commissions selected
+    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Medallion" || QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji") {
+        // Do nothing
+    }
+    else {
         DrawLineOfPrice("Background", BackgroundButtons[BackgroundSelected.selectedItem].buttonText, BackgroundSelected.price);
     }
 
@@ -207,12 +226,12 @@ function DrawSummary() {
 
     DrawTotalLine();
 
-    // If emoji or medallion commissions not selected
-    if (QualitySelected.selectedItem > 1) {
-        DrawBackButton(DrawBackgroundMenu);
+    // If emoji or medallion commissions selected
+    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Medallion" || QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji") {
+        DrawBackButton(DrawQuantityMenu);
     }
     else {
-        DrawBackButton(DrawQuantityMenu);
+        DrawBackButton(DrawBackgroundMenu);
     }
 
     DrawNextButton(DrawAskFinalDetails);
@@ -239,7 +258,13 @@ function DrawDiscountLine() {
 
 function DrawTotalLine() {
     var p = document.createElement("p");
-    p.textContent += "Total: " + FinishedCommissionOrder.Price + "$\n";
+    if (QualityButtons[QualitySelected.selectedItem].buttonText == "Comic") {
+        p.textContent += "Budget: " + FinishedCommissionOrder.Price;
+    }
+    else {
+        p.textContent += "Total: " + FinishedCommissionOrder.Price + "$";
+    }
+
     mainDiv.append(p);
 }
 
@@ -264,6 +289,7 @@ function DrawFinalDetails() {
 
     var descriptionInput = document.createElement("textarea");
     descriptionInput.id = "DescriptionInputID";
+    descriptionInput.className = "grid-item";
     descriptionInput.placeholder = "Description";
 
     // If there was something inputted already
@@ -280,6 +306,29 @@ function DrawFinalDetails() {
     );
 
     mainDiv.append(descriptionInput);
+}
+
+function DrawPriceInput() {
+    var p = document.createElement("p");
+    p.textContent += "Give budget for you comic";
+    mainDiv.append(p);
+
+    var budgetInput = document.createElement("input");
+    budgetInput.id = "BudgetInputId";
+
+    // If there was something inputted already
+    if (FinishedCommissionOrder.Price != null) {
+        budgetInput.value = FinishedCommissionOrder.Price;
+    }
+
+    budgetInput.addEventListener(
+        'change',
+        function () {
+            FinishedCommissionOrder.Price = budgetInput.value;
+        }
+    );
+
+    mainDiv.append(budgetInput);
 }
 
 function DrawFinish() {
@@ -370,7 +419,7 @@ function DrawQueueLines(queueObjects) {
         if (CommissionArray[CommissionIndex].Status === "Pending") {
             queuePending.append(p);
         }
-        else if(CommissionArray[CommissionIndex].Status === "Expected") {
+        else if (CommissionArray[CommissionIndex].Status === "Expected") {
             DrawMenuDescription("Current expected commission wait time: " + CommissionArray[CommissionIndex].Username);
         }
         else {
