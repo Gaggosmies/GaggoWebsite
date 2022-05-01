@@ -192,6 +192,22 @@ function SummaryForCommission() {
     FinishedCommissionOrder.Price = FinishedCommissionOrder.Price.toFixed(2)
 }
 
+function SummaryForCommissionComic() {
+    const date = new Date();
+    var dateNow = date.getFullYear().toString() + "/" + ('0' + (date.getMonth() + 1)).slice(-2).toString() + "/" + ('0' + date.getDate()).slice(-2).toString() + "-" + ('0' + date.getHours()).slice(-2).toString() + ':' + ('0' + date.getMinutes()).slice(-2).toString();
+
+    FinishedCommissionOrder.Quality = QualityButtons[QualitySelected.selectedItem].buttonText;
+    FinishedCommissionOrder.Quantity = "Comic";
+    FinishedCommissionOrder.Background = "Comic";
+    FinishedCommissionOrder.Date = dateNow;
+    // Price gotten from input - can be normal text too
+    FinishedCommissionOrder.Price = FinishedCommissionOrder.Price;
+
+    if (DiscountPercentage != 0) {
+        FinishedCommissionOrder.Note = "Discount: " + DiscountPercentage + "%";
+    }
+}
+
 function DrawSummary() {
     DrawLineOfPrice("Quality", QualityButtons[QualitySelected.selectedItem].buttonText, QualitySelected.price);
     DrawLineOfPriceX("Quantity", QuantityButtons[QuantitySelected.selectedItem].buttonText, QuantitySelected.price);
@@ -242,7 +258,13 @@ function DrawDiscountLine() {
 
 function DrawTotalLine() {
     var p = document.createElement("p");
-    p.textContent += "Total: " + FinishedCommissionOrder.Price + "$\n";
+    if (QualityButtons[QualitySelected.selectedItem].buttonText == "Comic") {
+        p.textContent += "Budget: " + FinishedCommissionOrder.Price;
+    }
+    else {
+        p.textContent += "Total: " + FinishedCommissionOrder.Price + "$";
+    }
+
     mainDiv.append(p);
 }
 
@@ -284,6 +306,29 @@ function DrawFinalDetails() {
     );
 
     mainDiv.append(descriptionInput);
+}
+
+function DrawPriceInput() {
+    var p = document.createElement("p");
+    p.textContent += "Give budget for you comic";
+    mainDiv.append(p);
+
+    var budgetInput = document.createElement("input");
+    budgetInput.id = "BudgetInputId";
+
+    // If there was something inputted already
+    if (FinishedCommissionOrder.Price != null) {
+        budgetInput.value = FinishedCommissionOrder.Price;
+    }
+
+    budgetInput.addEventListener(
+        'change',
+        function () {
+            FinishedCommissionOrder.Price = budgetInput.value;
+        }
+    );
+
+    mainDiv.append(budgetInput);
 }
 
 function DrawFinish() {

@@ -34,7 +34,9 @@ function DrawQuantityMenu() {
     ClearChildren();
     // If comic selected
     if (QualityButtons[QualitySelected.selectedItem].buttonText == "Comic") {
-
+        DrawPriceInput();
+        DrawBackButton(DrawQualityMenu);
+        DrawNextButton(DrawAskFinalDetails);
     }
     else {
         DrawButtons(QuantityButtons, QuantitySelected, DrawBackgroundMenu, DrawQualityMenu, "Choose amount of characters");
@@ -65,23 +67,38 @@ function DrawSummaryMenu() {
 
 function DrawAskFinalDetails() {
     ClearChildren();
-    DrawFinalDetails();
+    if (FinishedCommissionOrder.Price === 0 || FinishedCommissionOrder.Price == null) {
+        alert("Price can't be 0");
+        DrawQuantityMenu();
+    }
+    else {
+        DrawFinalDetails();
 
-    DrawBackButton(DrawSummaryMenu);
-    DrawNextButton(DrawFinishOrder);
+        if (QualityButtons[QualitySelected.selectedItem].buttonText == "Comic") {
+            // Initialize final commission class
+            SummaryForCommissionComic();
+            DrawBackButton(DrawQuantityMenu);
+        }
+        else{
+            DrawBackButton(DrawSummaryMenu);
+        }
+        
+        DrawNextButton(DrawFinishOrder);
+    }
 }
 
 function DrawFinishOrder() {
     ClearChildren();
 
-    DrawNoteForUser("Loading...");
-
-    GetCommissionCountForId();
-
     // If there are no given username
     if (FinishedCommissionOrder.Username == null || FinishedCommissionOrder.Username == "") {
         alert("Please give a proper username");
         DrawAskFinalDetails();
+    }
+    else {
+        DrawNoteForUser("Loading...");
+
+        GetCommissionCountForId();
     }
 }
 
