@@ -14,8 +14,9 @@ function DrawMainMenu() {
     DrawMainMenuButtons("Feedback", "btn-warning", DrawFeedback);
 }
 
-// DrawMainMenu();
-DrawBackButton(DrawMainMenu);
+DrawMainMenu();
+// For testing the ToS thingy
+// DrawBackButton(DrawMainMenu);
 
 function DrawReadToS() {
     ClearChildren();
