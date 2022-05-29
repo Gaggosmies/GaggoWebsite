@@ -10,10 +10,12 @@ function DrawMainMenu() {
     DrawMainMenuButtons("Queue", "btn-secondary", DrawQueue);
     DrawMainMenuButtons("Terms of Service", "btn-danger", OpenToS);
 
+    DrawMainMenuButtons("Prices", "btn-success", DrawCommission);
     DrawMainMenuButtons("Feedback", "btn-warning", DrawFeedback);
 }
 
-DrawMainMenu();
+// DrawMainMenu();
+DrawBackButton(DrawMainMenu);
 
 function DrawReadToS() {
     ClearChildren();
@@ -46,8 +48,8 @@ function DrawQuantityMenu() {
 function DrawBackgroundMenu() {
     ClearChildren();
 
-    // If emoji or medallion commissions selected
-    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji" || QualityButtons[QualitySelected.selectedItem].buttonText === "Medallion") {
+    // If emoji or Pride icon commissions selected
+    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji" || QualityButtons[QualitySelected.selectedItem].buttonText === "Pride icon") {
         DrawSummaryMenu();
     }
     else {
@@ -118,4 +120,12 @@ function DrawFeedback() {
     DrawBackButton(DrawMainMenu);
 
     DrawFeedbackScreen();
+}
+
+function DrawCommission() {
+    ClearChildren();
+
+    DrawBackButton(DrawMainMenu);
+
+    DrawCommissionsScreen();
 }

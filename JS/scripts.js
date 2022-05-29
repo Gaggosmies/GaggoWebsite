@@ -165,9 +165,9 @@ function SummaryForCommission() {
     FinishedCommissionOrder.Date = dateNow;
     FinishedCommissionOrder.Price = (QualitySelected.price * QuantitySelected.price)
 
-    // If medallion commissions selected
-    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Medallion") {
-        FinishedCommissionOrder.Background = "Medallion";
+    // If Pride icon commissions selected
+    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Pride icon") {
+        FinishedCommissionOrder.Background = "Pride icon";
     }
     // If emoji commissions selected
     else if (QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji") {
@@ -212,8 +212,8 @@ function DrawSummary() {
     DrawLineOfPrice("Quality", QualityButtons[QualitySelected.selectedItem].buttonText, QualitySelected.price);
     DrawLineOfPriceX("Quantity", QuantityButtons[QuantitySelected.selectedItem].buttonText, QuantitySelected.price);
 
-    // If emoji or medallion commissions selected
-    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Medallion" || QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji") {
+    // If emoji or Pride icon commissions selected
+    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Pride icon" || QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji") {
         // Do nothing
     }
     else {
@@ -226,8 +226,8 @@ function DrawSummary() {
 
     DrawTotalLine();
 
-    // If emoji or medallion commissions selected
-    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Medallion" || QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji") {
+    // If emoji or Pride icon commissions selected
+    if (QualityButtons[QualitySelected.selectedItem].buttonText === "Pride icon" || QualityButtons[QualitySelected.selectedItem].buttonText === "Emoji") {
         DrawBackButton(DrawQuantityMenu);
     }
     else {
@@ -431,9 +431,11 @@ function DrawQueueLines(queueObjects) {
 }
 
 function DrawFeedbackScreen() {
+    var div = document.createElement("div");
+    secondDiv.append(div);
     var p = document.createElement("p");
     p.textContent += "Give feedback for the website (If feedback is used, you might receive free Emojis! Include your username in feedback if you'd like)";
-    secondDiv.append(p);
+    div.append(p);
 
     var feedbackInput = document.createElement("textarea");
     feedbackInput.placeholder = "Feedback";
@@ -457,4 +459,33 @@ function DrawFeedbackScreen() {
 
 function OpenToS() {
     window.open(ToSLink);
+}
+
+function DrawCommissionsScreen() {
+    var p = document.createElement("p");
+    p.textContent += "Commission Prices:";
+    mainDiv.append(p);
+    
+    var commImg = document.createElement("img");
+    commImg.src = "Pics/Comm.png";
+    commImg.style.width = '80%';
+    mainDiv.append(commImg);
+
+    var p = document.createElement("p");
+    p.textContent += "Emoji Prices:";
+    mainDiv.append(p);
+    
+    var emojiImg = document.createElement("img");
+    emojiImg.src = "Pics/CommEmoji.png";
+    emojiImg.style.width = '80%';
+    mainDiv.append(emojiImg);
+
+    var p = document.createElement("p");
+    p.textContent += "Pride icons: 7$";
+    mainDiv.append(p);
+    
+    var prideImg = document.createElement("img");
+    prideImg.src = "Pics/CommPride.png";
+    prideImg.style.width = '80%';
+    mainDiv.append(prideImg);
 }

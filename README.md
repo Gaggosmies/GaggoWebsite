@@ -10,6 +10,9 @@ to install all the node modules into your local computer.
 Todo: 
 - [ ] Make array for orders (multiple orders at the same time)?
 
+- [ ] MakeElement() function for scripts? to make it look more clear. Instead of appending in function, append like currently done.
+- [ ] Add ToS inside the website. Insert one div into the mainDiv then insert stuff there
+
 - [ ] Add Comic quality -> goes to "insert budget" price
 - [ ] Make code more readable (check Discord #R1)
 
